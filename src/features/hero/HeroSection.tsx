@@ -1,11 +1,9 @@
 import HeroHeader from "./components/HeroHeader";
-import HeroPolaroid from "./components/HeroPolaroid";
 
 export default function HeroSection() {
   return (
-    <section className="bg-warm flex items-center gap-x-5 justify-around w-full px-5">
+    <section className="w-full max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 md:px-10 py-12 sm:py-16 flex items-center justify-center">
       <HeroHeader />
-      <HeroPolaroid />
     </section>
   );
 }
