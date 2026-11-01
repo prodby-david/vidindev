@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import { SocialLink } from "../contact.types";
+import { SocialLink } from "../../contact.types";
 
 interface ContactSocialBadgeProps {
   social: SocialLink;
@@ -22,7 +22,7 @@ export default function ContactSocialBadge({
         href={social.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-sand/60 dark:bg-sand/30 text-deep-ocean border border-deep-ocean/10 dark:border-horizon/20 hover:border-horizon transition-colors"
+        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md text-xs font-semibold bg-sand/60 dark:bg-sand/30 text-deep-ocean border border-deep-ocean/10 dark:border-horizon/20 hover:border-horizon transition-colors"
       >
         <span>{social.name}</span>
         <span className="text-ocean text-[11px] font-normal">

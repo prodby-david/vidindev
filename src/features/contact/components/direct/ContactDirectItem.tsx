@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ContactInfoItem } from "../contact.types";
-import { CONTACT_DIRECT_ICON_MAP } from "../constants";
+import { ContactInfoItem } from "../../contact.types";
+import { CONTACT_DIRECT_ICON_MAP } from "../../constants/form/contact-icon.constant";
 
 interface ContactDirectItemProps {
   item: ContactInfoItem;
