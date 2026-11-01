@@ -4,7 +4,7 @@ export const CHATBOT_INITIAL_MESSAGES: ChatMessage[] = [
   {
     id: "welcome-1",
     sender: "bot",
-    text: "Hi there! I'm David's AI assistant. Ask me anything about his projects, technical skills, or availability! ☺",
+    text: "Hi there! I'm John David Gaspar. Ask me anything about my projects, technical skills, or availability! ☺",
     timestamp: "Just now",
   },
 ];
@@ -12,8 +12,8 @@ export const CHATBOT_INITIAL_MESSAGES: ChatMessage[] = [
 export const QUICK_PROMPTS: QuickPrompt[] = [
   {
     id: "about",
-    label: "About David",
-    query: "Tell me about John David",
+    label: "About Me",
+    query: "Tell me about yourself",
   },
   {
     id: "stack",
