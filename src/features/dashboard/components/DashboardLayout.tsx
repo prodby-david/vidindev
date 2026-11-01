@@ -7,47 +7,44 @@ import { Menu, X, ExternalLink } from "lucide-react";
 import ThemeToggle from "@/shared/components/theme/ThemeToggle";
 import NavBrand from "@/shared/components/nav/NavBrand";
 import { DashboardTab } from "../dashboard.types";
-import { DASHBOARD_NAV_TABS } from "../constants";
+import { DASHBOARD_NAV_TABS } from "../constants/dashboard-nav.constant";
 import DashboardSidebar from "./DashboardSidebar";
-import DashboardAnalyticsTab from "./tabs/DashboardAnalyticsTab";
-import DashboardMarqueeTab from "./tabs/DashboardMarqueeTab";
-import DashboardSkillsTab from "./tabs/DashboardSkillsTab";
-import DashboardCertificationsTab from "./tabs/DashboardCertificationsTab";
-import DashboardGearTab from "./tabs/DashboardGearTab";
-import DashboardProjectsTab from "./tabs/DashboardProjectsTab";
-import DashboardExperienceTab from "./tabs/DashboardExperienceTab";
-import DashboardContactTab from "./tabs/DashboardContactTab";
+import AboutMarqueeTab from "@/features/about/admin/components/marquee/AboutMarqueeTab";
+import AboutCertificationsTab from "@/features/about/admin/components/certifications/AboutCertificationsTab";
+import GearAdminTab from "@/features/gear/admin/components/GearAdminTab";
+import SkillsAdminTab from "@/features/skills/admin/components/SkillsAdminTab";
+import ProjectsAdminTab from "@/features/projects/admin/components/showcase/ProjectsAdminTab";
+import ExperienceAdminTab from "@/features/experience/admin/components/timeline/ExperienceAdminTab";
+import InquiriesTab from "@/features/contact/admin/components/InquiriesTab";
 
 export default function DashboardLayout() {
-  const [activeTab, setActiveTab] = useState<DashboardTab>("analytics");
+  const [activeTab, setActiveTab] = useState<DashboardTab>("marquee");
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const activeTabMeta = DASHBOARD_NAV_TABS.find((t) => t.id === activeTab);
 
   const renderActiveTab = () => {
     switch (activeTab) {
-      case "analytics":
-        return <DashboardAnalyticsTab />;
       case "marquee":
-        return <DashboardMarqueeTab />;
+        return <AboutMarqueeTab />;
       case "skills":
-        return <DashboardSkillsTab />;
+        return <SkillsAdminTab />;
       case "certifications":
-        return <DashboardCertificationsTab />;
+        return <AboutCertificationsTab />;
       case "gear":
-        return <DashboardGearTab />;
+        return <GearAdminTab />;
       case "projects":
-        return <DashboardProjectsTab />;
+        return <ProjectsAdminTab />;
       case "experience":
-        return <DashboardExperienceTab />;
-      case "contact":
-        return <DashboardContactTab />;
+        return <ExperienceAdminTab />;
+      case "inquiries":
+        return <InquiriesTab />;
     }
   };
 
   return (
     <div className="h-screen w-full flex flex-col lg:flex-row bg-warm text-deep-ocean overflow-hidden">
-      <div className="lg:hidden flex items-center justify-between px-4 py-3 border-b border-deep-ocean/10 dark:border-horizon/15 bg-polaroid dark:bg-sand/40 shrink-0">
+      <header className="lg:hidden flex items-center justify-between px-4 py-3 border-b border-deep-ocean/10 dark:border-horizon/15 bg-polaroid dark:bg-sand/40 shrink-0">
         <div className="flex items-center gap-2.5">
           <button
             type="button"
@@ -59,7 +56,7 @@ export default function DashboardLayout() {
           </button>
           <NavBrand />
           {activeTabMeta && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-horizon/10 text-horizon">
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-horizon/10 text-horizon">
               {activeTabMeta.label}
             </span>
           )}
@@ -76,7 +73,7 @@ export default function DashboardLayout() {
             <ExternalLink size={16} />
           </Link>
         </div>
-      </div>
+      </header>
 
       <DashboardSidebar
         activeTab={activeTab}

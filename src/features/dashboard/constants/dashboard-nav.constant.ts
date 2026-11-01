@@ -1,52 +1,69 @@
+import { ComponentType } from "react";
+import {
+  Camera,
+  Layers,
+  Award,
+  Laptop,
+  FolderGit2,
+  Briefcase,
+  Inbox,
+} from "lucide-react";
 import { DashboardNavTab } from "../dashboard.types";
+
+export const TAB_ICON_MAP: Record<
+  string,
+  ComponentType<{ size?: number; className?: string }>
+> = {
+  Camera,
+  Layers,
+  Award,
+  Laptop,
+  FolderGit2,
+  Briefcase,
+  Inbox,
+};
 
 export const DASHBOARD_NAV_TABS: DashboardNavTab[] = [
   {
-    id: "analytics",
-    label: "Visitor Analytics",
-    description: "Monitor visitor traffic, user interactions, and real-time app telemetry",
-    iconName: "Activity",
-  },
-  {
     id: "marquee",
     label: "Polaroid Snapshots",
-    description: "Manage moments, polaroid images, and captions in the marquee conveyor",
+    description: "Manage moments, photos, and captions in the scrolling marquee",
     iconName: "Camera",
   },
   {
     id: "skills",
     label: "Skills & Technologies",
-    description: "Manage engineering skill stacks and technical competencies",
+    description: "Manage technologies, programming languages, and tools",
     iconName: "Layers",
   },
   {
     id: "certifications",
     label: "Certifications",
-    description: "Manage degrees, verified diplomas, and technical certifications",
+    description: "Manage diplomas, certificates, and achievements",
     iconName: "Award",
   },
   {
     id: "gear",
     label: "Toolbox & Gear",
-    description: "Manage everyday developer setup, hardware, and workflow software",
+    description: "Manage hardware setup, developer tools, and workflow apps",
     iconName: "Laptop",
   },
   {
     id: "projects",
     label: "Projects",
-    description: "Manage featured projects, case studies, technologies, and live URLs",
+    description: "Manage featured projects, descriptions, tags, and links",
     iconName: "FolderGit2",
   },
   {
     id: "experience",
     label: "Experience",
-    description: "Manage professional career journey, timeline roles, and achievements",
+    description: "Manage work history, engineering positions, and responsibilities",
     iconName: "Briefcase",
   },
   {
-    id: "contact",
-    label: "Contact & Socials",
-    description: "Manage direct contact information, availability status, and social channels",
-    iconName: "Mail",
+    id: "inquiries",
+    label: "Inquiries",
+    description: "Read messages received through the public contact form",
+    iconName: "Inbox",
   },
 ];

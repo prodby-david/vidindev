@@ -2,22 +2,14 @@
 
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  Activity,
-  Camera,
-  Layers,
-  Award,
-  Laptop,
-  FolderGit2,
-  Briefcase,
-  Mail,
-  ExternalLink,
-  X,
-} from "lucide-react";
+import { Layers, ExternalLink, LogOut, X } from "lucide-react";
 import ThemeToggle from "@/shared/components/theme/ThemeToggle";
 import NavBrand from "@/shared/components/nav/NavBrand";
 import { DashboardTab } from "../dashboard.types";
-import { DASHBOARD_NAV_TABS } from "../constants";
+import {
+  DASHBOARD_NAV_TABS,
+  TAB_ICON_MAP,
+} from "../constants/dashboard-nav.constant";
 
 interface DashboardSidebarProps {
   activeTab: DashboardTab;
@@ -26,26 +18,17 @@ interface DashboardSidebarProps {
   onSelectTab: (tab: DashboardTab) => void;
 }
 
-const TAB_ICON_MAP: Record<
-  string,
-  React.ComponentType<{ size?: number; className?: string }>
-> = {
-  Activity,
-  Camera,
-  Layers,
-  Award,
-  Laptop,
-  FolderGit2,
-  Briefcase,
-  Mail,
-};
-
 export default function DashboardSidebar({
   activeTab,
   isOpen = false,
   onClose,
   onSelectTab,
 }: DashboardSidebarProps) {
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    window.location.assign("/dashboard/login");
+  }
+
   return (
     <>
       <AnimatePresence>
@@ -73,7 +56,7 @@ export default function DashboardSidebar({
             <div className="flex flex-col gap-0.5">
               <NavBrand />
               <span className="text-[10px] text-ocean uppercase font-mono tracking-wider">
-                Studio & Telemetry
+                Content Studio
               </span>
             </div>
 
@@ -106,7 +89,7 @@ export default function DashboardSidebar({
                     onClick={() => onSelectTab(tab.id)}
                     className={`flex items-center justify-between gap-3 px-3 py-2.5 rounded-md text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer text-left ${
                       isActive
-                        ? "bg-horizon text-white shadow-xs scale-[1.01]"
+                        ? "bg-ocean text-white shadow-xs scale-[1.01]"
                         : "text-deep-ocean hover:bg-sand/60 dark:hover:bg-sand/60 hover:text-horizon"
                     }`}
                   >
@@ -135,6 +118,15 @@ export default function DashboardSidebar({
             <span>View Public Site</span>
             <ExternalLink size={13} />
           </Link>
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex items-center justify-between px-3 py-2 rounded-md text-xs font-semibold text-ocean hover:text-red-600 hover:bg-red-500/5 transition-colors cursor-pointer"
+          >
+            <span>Sign out</span>
+            <LogOut size={13} />
+          </button>
         </div>
       </aside>
     </>
