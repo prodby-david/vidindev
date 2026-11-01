@@ -12,13 +12,14 @@
   --cashmere-cream: #fbe8cc;
 
   --deep-ocean: #164c63;
-  --ocean-blue: #3f7892;
+  --ocean-blue: #356a82;
 
   --background: var(--bg-warm);
   --foreground: var(--deep-ocean);
 }
 
 .dark {
+  color-scheme: dark;
   --bg-warm: #0d1b2a;
   --bg-sand: #1b263b;
   --bg-foam: #172436;
@@ -67,29 +68,27 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-*:focus,
-*:focus-visible,
-*:focus-within {
-  outline: none !important;
+:where(a, button, [role="button"], [tabindex], input, select, textarea):focus {
+  outline: none;
 }
 
-button:focus,
-button:focus-visible,
-button:active,
-a:focus,
-a:focus-visible,
-a:active,
-[role="button"]:focus,
-[role="button"]:focus-visible,
-[role="button"]:active,
-[tabindex]:focus,
-[tabindex]:focus-visible,
-[tabindex]:active {
-  outline: none !important;
+:where(a, button, [role="button"], [tabindex], input, select, textarea):focus-visible {
+  outline: 2px solid var(--horizon-blue);
+  outline-offset: 3px;
 }
 
 html {
   scroll-padding-top: 5rem;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 body {
@@ -131,9 +130,27 @@ body {
   will-change: transform;
 }
 
-.animate-marquee:has(button:hover) {
-  animation-play-state: paused;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee {
+    width: 100%;
+    overflow-x: auto;
+    animation: none;
+  }
 }
+
 
 .perspective-1000 {
   perspective: 1000px;

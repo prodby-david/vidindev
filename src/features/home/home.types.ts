@@ -1,4 +1,4 @@
-export type CapabilityIcon = "Globe" | "Smartphone" | "Server";
+export type CapabilityIcon = "Layers" | "Server" | "Cloud";
 
 export interface HomeCapability {
   id: string;
@@ -6,6 +6,18 @@ export interface HomeCapability {
   description: string;
   icon: CapabilityIcon;
   tags: string[];
+}
+
+export type ServiceIcon = "Globe" | "AppWindow" | "Server" | "Cloud";
+
+export interface HomeService {
+  id: string;
+  title: string;
+  description: string;
+  icon: ServiceIcon;
+  deliverables: string[];
+  tags: string[];
+  contactSubject: string;
 }
 
 export type ProcessStepIcon = "Search" | "Layers" | "Code2" | "Rocket";

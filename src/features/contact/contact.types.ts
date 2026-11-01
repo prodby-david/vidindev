@@ -1,3 +1,25 @@
+import { ContactSubject } from "./validator/contact.schema";
+
+export type { ContactSubject };
+
+export interface ContactFormData {
+  name: string;
+  email: string;
+  phone: string;
+  subject: ContactSubject | "";
+  message: string;
+}
+
+export interface ContactInquiry {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  subject: ContactSubject;
+  message: string;
+  createdAt: string;
+}
+
 export interface ContactCta {
   label: string;
   href: string;

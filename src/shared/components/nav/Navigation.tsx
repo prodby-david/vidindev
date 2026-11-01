@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useScroll } from "@/shared/hooks/useScroll";
-import { NAV_ITEMS } from "./constants";
+import { NAV_ITEMS } from "./constants/navigation.constant";
 import NavBrand from "./NavBrand";
 import NavLink from "./NavLink";
 import NavToggle from "./NavToggle";
@@ -17,32 +17,41 @@ export default function Navigation() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav
-      className={`sticky top-0 z-50 w-full px-6 sm:px-10 text-ocean py-4 transition-[background-color,border-color,box-shadow] duration-200 ${
-        isScrolled
-          ? "bg-warm/85 backdrop-blur-md border-b border-deep-ocean/10 dark:border-horizon/15 shadow-sm"
-          : "bg-transparent border-b border-transparent"
-      }`}
-    >
-      <div className="flex items-center justify-between w-full">
-        <div>
-          <NavBrand onClick={closeMenu} />
-        </div>
+    <header className="sticky top-3 sm:top-4 z-50 w-full px-3 sm:px-4 pointer-events-none transition-all duration-200">
+      <div className="relative w-full max-w-2xl lg:max-w-3xl mx-auto">
+        <nav
+          aria-label="Main Navigation"
+          className={`pointer-events-auto flex items-center justify-between w-full rounded-md py-2 px-4 sm:px-5 lg:px-6 transition-[background-color,border-color,box-shadow] duration-200 ${
+            isScrolled
+              ? "bg-warm/95 dark:bg-sand/95 backdrop-blur-md border border-deep-ocean/15 dark:border-horizon/25 shadow-md"
+              : "bg-warm/85 dark:bg-sand/85 backdrop-blur-md border border-deep-ocean/10 dark:border-horizon/15 shadow-sm"
+          }`}
+        >
+          {/* Left Zone: Brand */}
+          <div className="flex items-center shrink-0">
+            <NavBrand onClick={closeMenu} />
+          </div>
 
-        <div className="hidden md:flex items-center gap-x-6 lg:gap-x-8 text-sm font-semibold">
-          {NAV_ITEMS.map((item) => (
-            <NavLink key={item.href} item={item} />
-          ))}
-          <ThemeToggle />
-        </div>
+          {/* Center Zone: Desktop Navigation Links */}
+          <div className="hidden md:flex items-center justify-center gap-x-5 lg:gap-x-6 text-sm font-semibold">
+            {NAV_ITEMS.map((item) => (
+              <NavLink key={item.href} item={item} />
+            ))}
+          </div>
 
-        <div className="flex items-center gap-x-2 md:hidden">
-          <ThemeToggle />
-          <NavToggle isOpen={isOpen} onToggle={toggleMenu} />
-        </div>
+          {/* Right Zone: Controls (Desktop: ThemeToggle / Mobile: ThemeToggle + Hamburger) */}
+          <div className="hidden md:flex items-center shrink-0">
+            <ThemeToggle />
+          </div>
+
+          <div className="flex items-center gap-x-2 md:hidden">
+            <ThemeToggle />
+            <NavToggle isOpen={isOpen} onToggle={toggleMenu} />
+          </div>
+        </nav>
+
+        <MobileNav isOpen={isOpen} onClose={closeMenu} />
       </div>
-
-      <MobileNav isOpen={isOpen} onClose={closeMenu} />
-    </nav>
+    </header>
   );
 }

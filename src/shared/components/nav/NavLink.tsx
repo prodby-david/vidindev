@@ -43,11 +43,11 @@ export default function NavLink({
         {isActive ? (
           <motion.div
             layoutId="mobile-nav-indicator"
-            className="w-8 h-0.5 rounded-full mt-1 bg-horizon"
+            className="w-8 h-0.5 rounded-md mt-1 bg-horizon"
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
           />
         ) : (
-          <div className="w-8 h-0.5 rounded-full mt-1 opacity-0" />
+          <div className="w-8 h-0.5 rounded-md mt-1 opacity-0" />
         )}
       </Link>
     );
@@ -65,7 +65,7 @@ export default function NavLink({
       {isActive && (
         <motion.div
           layoutId="desktop-nav-indicator"
-          className="absolute -bottom-2.5 left-0 right-0 w-full"
+          className="absolute -bottom-2 left-0 right-0 w-full"
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
         >
           <SquigglyLine className="w-full" />

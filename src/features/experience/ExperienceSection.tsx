@@ -1,20 +1,23 @@
-import { EXPERIENCE_DATA } from "./constants";
-import ExperienceHeader from "./components/ExperienceHeader";
-import ExperienceTimeline from "./components/ExperienceTimeline";
+import { ExperienceItem } from "./experience.types";
+import ExperienceHeader from "./components/timeline/ExperienceHeader";
+import ExperienceTimeline from "./components/timeline/ExperienceTimeline";
 
-export default function ExperienceSection() {
+interface ExperienceSectionProps {
+  items: ExperienceItem[];
+}
+
+export default function ExperienceSection({ items }: ExperienceSectionProps) {
   return (
     <section
       id="experience"
-      className="w-full max-w-7xl mx-auto px-6 sm:px-10 pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16"
+      className="w-full max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 md:px-10 pt-12 sm:pt-16 md:pt-20 pb-16 sm:pb-24 flex flex-col items-center gap-12 sm:gap-16"
     >
-      <ExperienceHeader
-        category={EXPERIENCE_DATA.category}
-        title={EXPERIENCE_DATA.title}
-        description={EXPERIENCE_DATA.description}
-        resumeUrl={EXPERIENCE_DATA.resumeUrl}
-      />
-      <ExperienceTimeline items={EXPERIENCE_DATA.items} />
+      <ExperienceHeader />
+      {items.length > 0 ? (
+        <ExperienceTimeline items={items} />
+      ) : (
+        <p className="text-sm text-ocean">Experience is being updated.</p>
+      )}
     </section>
   );
 }

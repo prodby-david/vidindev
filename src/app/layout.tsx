@@ -3,6 +3,7 @@ import "./globals.css";
 import { DM_Sans, Space_Grotesk, Caveat } from "next/font/google";
 import { ThemeProvider } from "@/shared/providers/theme-provider";
 import AppLayoutShell from "@/shared/components/layout/AppLayoutShell";
+import { Toaster } from "@/shared/components/ui";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -20,9 +21,9 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "John David Gaspar - Software Engineer",
+  title: "John David Gaspar - Full-Stack Software Engineer",
   description:
-    "I am a software engineer with a passion for building web applications. I have experience in React, Next.js, and Node.js. I am always looking to learn new technologies and improve my skills.",
+    "Full-stack software engineer building software around problems worth solving. Specializing in Next.js, TypeScript, PostgreSQL, and resilient web applications.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -32,9 +33,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${dmSans.variable} ${caveat.variable} antialiased`}
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen min-w-[350px] overflow-x-hidden flex flex-col">
         <ThemeProvider>
           <AppLayoutShell>{children}</AppLayoutShell>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

@@ -3,9 +3,3 @@ export interface SkillCategory {
   title: string;
   skills: string[];
 }
-
-export interface SkillsData {
-  category: string;
-  title: string;
-  categories: SkillCategory[];
-}

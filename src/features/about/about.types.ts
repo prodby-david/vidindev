@@ -11,10 +11,8 @@ export interface AboutData {
   category: string;
   title: string;
   description: string;
-  note: string;
   imageSrc: string;
   infoItems: AboutInfoItem[];
-  currentlyExploring?: string[];
 }
 
 export interface AboutValueItem {
@@ -22,12 +20,6 @@ export interface AboutValueItem {
   title: string;
   description: string;
   icon: "Hammer" | "BookOpen" | "HeartHandshake";
-}
-
-export interface AboutGearCategory {
-  id: string;
-  category: string;
-  items: string[];
 }
 
 export type AboutCertType = "degree" | "certification";
@@ -40,8 +32,8 @@ export interface AboutCertItem {
   details: string;
   type: AboutCertType;
   credentialImage: string;
-  credentialId: string;
-  verificationUrl?: string;
+  credentialId?: string | null;
+  verificationUrl?: string | null;
 }
 
 export interface AboutMarqueeItem {

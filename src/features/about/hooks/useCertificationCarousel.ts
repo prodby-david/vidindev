@@ -8,6 +8,11 @@ export function useCertificationCarousel(totalItems: number) {
   const [canScrollRight, setCanScrollRight] = useState(totalItems > 1);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const getCardWidth = (el: HTMLDivElement) =>
+    el.firstElementChild
+      ? (el.firstElementChild as HTMLElement).clientWidth + 24
+      : 340;
+
   const checkScrollState = useCallback(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -16,10 +21,7 @@ export function useCertificationCarousel(totalItems: number) {
     setCanScrollLeft(scrollLeft > 10);
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
 
-    const cardWidth = el.firstElementChild
-      ? (el.firstElementChild as HTMLElement).clientWidth + 24
-      : clientWidth;
-    const nextIndex = Math.round(scrollLeft / cardWidth);
+    const nextIndex = Math.round(scrollLeft / getCardWidth(el));
     setActiveIndex(Math.min(Math.max(nextIndex, 0), totalItems - 1));
   }, [totalItems]);
 
@@ -39,32 +41,17 @@ export function useCertificationCarousel(totalItems: number) {
 
   const scrollPrev = () => {
     const el = containerRef.current;
-    if (!el) return;
-
-    const cardWidth = el.firstElementChild
-      ? (el.firstElementChild as HTMLElement).clientWidth + 24
-      : 340;
-    el.scrollBy({ left: -cardWidth, behavior: "smooth" });
+    if (el) el.scrollBy({ left: -getCardWidth(el), behavior: "smooth" });
   };
 
   const scrollNext = () => {
     const el = containerRef.current;
-    if (!el) return;
-
-    const cardWidth = el.firstElementChild
-      ? (el.firstElementChild as HTMLElement).clientWidth + 24
-      : 340;
-    el.scrollBy({ left: cardWidth, behavior: "smooth" });
+    if (el) el.scrollBy({ left: getCardWidth(el), behavior: "smooth" });
   };
 
   const scrollTo = (index: number) => {
     const el = containerRef.current;
-    if (!el) return;
-
-    const cardWidth = el.firstElementChild
-      ? (el.firstElementChild as HTMLElement).clientWidth + 24
-      : 340;
-    el.scrollTo({ left: index * cardWidth, behavior: "smooth" });
+    if (el) el.scrollTo({ left: index * getCardWidth(el), behavior: "smooth" });
   };
 
   return {

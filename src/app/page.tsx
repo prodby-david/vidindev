@@ -1,8 +1,8 @@
 import SplashScreen from "@/features/splash/components/SplashScreen";
 import HeroSection from "@/features/hero/HeroSection";
-import HomeCapabilitiesSection from "@/features/home/components/HomeCapabilitiesSection";
-import HomeProcessSection from "@/features/home/components/HomeProcessSection";
-import HomeAboutPreviewSection from "@/features/home/components/HomeAboutPreviewSection";
+import HomeServicesSection from "@/features/home/components/services/HomeServicesSection";
+import HomeProcessSection from "@/features/home/components/process/HomeProcessSection";
+import HomeAboutPreviewSection from "@/features/home/components/about-preview/HomeAboutPreviewSection";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <div className="min-h-[calc(100vh-80px)] flex items-center justify-center">
         <HeroSection />
       </div>
-      <HomeCapabilitiesSection />
+      <HomeServicesSection />
       <HomeProcessSection />
       <HomeAboutPreviewSection />
     </div>

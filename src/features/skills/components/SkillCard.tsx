@@ -8,6 +8,10 @@ interface SkillCardProps {
 }
 
 export default function SkillCard({ category }: SkillCardProps) {
+  const uniqueSkills = Array.from(
+    new Set(category.skills.map((s) => s.trim()))
+  ).filter(Boolean);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
@@ -23,9 +27,9 @@ export default function SkillCard({ category }: SkillCardProps) {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {category.skills.map((skill) => (
+        {uniqueSkills.map((skill, index) => (
           <motion.span
-            key={skill}
+            key={`${category.id}-${skill}-${index}`}
             whileHover={{ y: -1 }}
             transition={{ duration: 0.15 }}
             className="inline-flex items-center text-xs font-medium px-2.5 py-1.5 rounded-md bg-sand/60 dark:bg-sand/40 text-deep-ocean border border-deep-ocean/10 dark:border-horizon/20 hover:border-horizon hover:shadow-sm transition-all cursor-default"

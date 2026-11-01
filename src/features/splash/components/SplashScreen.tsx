@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { SPLASH_CONFIG } from "../constants";
+import { SPLASH_CONFIG } from "../constants/splash.constant";
 import { useSplashScreen } from "../hooks/useSplashScreen";
 
 export default function SplashScreen() {
@@ -37,7 +37,7 @@ export default function SplashScreen() {
             <div className="text-xs sm:text-sm font-semibold tracking-[0.28em] text-horizon uppercase mb-3">
               {SPLASH_CONFIG.tagline}
             </div>
-            <div className="w-12 h-0.5 bg-mint/70 rounded-full mb-3" />
+            <div className="w-12 h-0.5 bg-mint/70 rounded-md mb-3" />
             <div className="font-handwritten text-xl sm:text-2xl text-deep-ocean/70 dark:text-mint">
               {SPLASH_CONFIG.signature}
             </div>
