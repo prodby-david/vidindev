@@ -1,0 +1,170 @@
+[
+  {
+    "id": "column.public.Certification.type",
+    "label": "Add column \"type\" to \"Certification\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "type",
+        "table": "Certification"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"type\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "Certification",
+          "type"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"type\"",
+        "sql": "ALTER TABLE \"public\".\"Certification\" ADD COLUMN \"type\" text DEFAULT 'CERTIFICATION' NOT NULL"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"type\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "Certification",
+          "type"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "column.public.Experience.icon",
+    "label": "Add column \"icon\" to \"Experience\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "icon",
+        "table": "Experience"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"icon\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "Experience",
+          "icon"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"icon\"",
+        "sql": "ALTER TABLE \"public\".\"Experience\" ADD COLUMN \"icon\" text DEFAULT 'Code2' NOT NULL"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"icon\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "Experience",
+          "icon"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "checkConstraint.Certification.Certification_type_check_7d910799",
+    "label": "Add check constraint \"Certification_type_check_7d910799\" on \"Certification\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "checkConstraint",
+        "name": "Certification_type_check_7d910799",
+        "table": "Certification"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"Certification_type_check_7d910799\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Certification_type_check_7d910799",
+          "public",
+          "\"public\".\"Certification\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add check constraint \"Certification_type_check_7d910799\"",
+        "sql": "ALTER TABLE \"public\".\"Certification\" ADD CONSTRAINT \"Certification_type_check_7d910799\" CHECK (\"type\" IN ('DEGREE', 'CERTIFICATION'))"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"Certification_type_check_7d910799\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Certification_type_check_7d910799",
+          "public",
+          "\"public\".\"Certification\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "checkConstraint.Experience.Experience_icon_check_7faddac1",
+    "label": "Add check constraint \"Experience_icon_check_7faddac1\" on \"Experience\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "checkConstraint",
+        "name": "Experience_icon_check_7faddac1",
+        "table": "Experience"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"Experience_icon_check_7faddac1\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Experience_icon_check_7faddac1",
+          "public",
+          "\"public\".\"Experience\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add check constraint \"Experience_icon_check_7faddac1\"",
+        "sql": "ALTER TABLE \"public\".\"Experience\" ADD CONSTRAINT \"Experience_icon_check_7faddac1\" CHECK (\"icon\" IN ('Code2', 'Terminal', 'GraduationCap'))"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"Experience_icon_check_7faddac1\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Experience_icon_check_7faddac1",
+          "public",
+          "\"public\".\"Experience\""
+        ]
+      }
+    ]
+  }
+]

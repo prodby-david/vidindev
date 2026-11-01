@@ -1,0 +1,236 @@
+[
+  {
+    "id": "table.Certification",
+    "label": "Create table \"Certification\"",
+    "summary": "Creates table \"Certification\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Certification"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Certification\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Certification\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Certification\"",
+        "sql": "CREATE TABLE \"public\".\"Certification\" (\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"credentialId\" text,\n  \"credentialImage\" text NOT NULL,\n  \"details\" text NOT NULL,\n  \"id\" uuid NOT NULL,\n  \"institution\" text NOT NULL,\n  \"period\" text NOT NULL,\n  \"title\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  \"verificationUrl\" text,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Certification\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Certification\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.Contact",
+    "label": "Create table \"Contact\"",
+    "summary": "Creates table \"Contact\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Contact"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Contact\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Contact\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Contact\"",
+        "sql": "CREATE TABLE \"public\".\"Contact\" (\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"email\" text NOT NULL,\n  \"id\" uuid NOT NULL,\n  \"message\" text NOT NULL,\n  \"name\" text NOT NULL,\n  \"phone\" text,\n  \"subject\" text NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"Contact_subject_check_5e63ea0a\" CHECK (\"subject\" IN ('PROJECT_COLLABORATION', 'JOB_OPPORTUNITY', 'TECHNICAL_CONSULTATION', 'GENERAL_INQUIRY', 'OTHER'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Contact\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Contact\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.Experience",
+    "label": "Create table \"Experience\"",
+    "summary": "Creates table \"Experience\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Experience"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Experience\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Experience\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Experience\"",
+        "sql": "CREATE TABLE \"public\".\"Experience\" (\n  \"company\" text NOT NULL,\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"details\" text NOT NULL,\n  \"id\" uuid NOT NULL,\n  \"period\" text NOT NULL,\n  \"role\" text NOT NULL,\n  \"skills\" text[] NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"Experience_skills_elem_not_null_79c19a4f\" CHECK (array_position(\"skills\", NULL) IS NULL)\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Experience\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Experience\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.GearCategory",
+    "label": "Create table \"GearCategory\"",
+    "summary": "Creates table \"GearCategory\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "GearCategory"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"GearCategory\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"GearCategory\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"GearCategory\"",
+        "sql": "CREATE TABLE \"public\".\"GearCategory\" (\n  \"category\" text NOT NULL,\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"id\" uuid NOT NULL,\n  \"items\" text[] NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"GearCategory_items_elem_not_null_ea5c0770\" CHECK (array_position(\"items\", NULL) IS NULL)\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"GearCategory\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"GearCategory\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.PolaroidSnapshot",
+    "label": "Create table \"PolaroidSnapshot\"",
+    "summary": "Creates table \"PolaroidSnapshot\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "PolaroidSnapshot"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"PolaroidSnapshot\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"PolaroidSnapshot\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"PolaroidSnapshot\"",
+        "sql": "CREATE TABLE \"public\".\"PolaroidSnapshot\" (\n  \"alt\" text NOT NULL,\n  \"caption\" text NOT NULL,\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"id\" uuid NOT NULL,\n  \"src\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"PolaroidSnapshot\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"PolaroidSnapshot\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.Project",
+    "label": "Create table \"Project\"",
+    "summary": "Creates table \"Project\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Project"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Project\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Project\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Project\"",
+        "sql": "CREATE TABLE \"public\".\"Project\" (\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"description\" text NOT NULL,\n  \"id\" uuid NOT NULL,\n  \"imageSrc\" text NOT NULL,\n  \"link\" text NOT NULL,\n  \"number\" text NOT NULL,\n  \"tags\" text[] NOT NULL,\n  \"title\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"Project_tags_elem_not_null_aecbe9e2\" CHECK (array_position(\"tags\", NULL) IS NULL)\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Project\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Project\""
+        ]
+      }
+    ]
+  }
+]
